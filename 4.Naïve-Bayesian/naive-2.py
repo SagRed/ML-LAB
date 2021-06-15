@@ -4,28 +4,40 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
 from sklearn import metrics
+from sklearn import preprocessing
+
+dataf = pd.read_csv("./edata.csv")
+feature_col_names = ['outlook','temp','humidity','wind']
+predicted_class_names = ['play']
+
+def MultiLabelEncoder(columnlist,dataframe):
+    for i in columnlist:
+        labelencoder_X=preprocessing.LabelEncoder()
+        dataframe[i]=labelencoder_X.fit_transform(dataframe[i])
+    return dataframe
+le = preprocessing.LabelEncoder()
+feature_col = ['outlook','temp','humidity','wind','play']
+
+Xdata = MultiLabelEncoder(feature_col,dataf)
+X = Xdata[feature_col_names]
+
+yy = dataf[predicted_class_names]
 
 
-dataf = pd.read_csv("./data.csv")
-feature_col_names = ['num_preg', 'glucose_conc', 'diastolic_bp', 'thickness', 'insulin', 'bmi', 'diab_pred', 'age']
-predicted_class_names = ['diabetes']
-
-X = dataf[feature_col_names].values
-y = dataf[predicted_class_names].values
-
+y = Xdata[predicted_class_names]
 print(dataf.head)
 
 xtrain,xtest,ytrain,ytest=train_test_split(X,y,test_size=0.33)
-
 print ('\nThe total number of Training Data:',ytrain.shape)
 print ('The total number of Test Data:',ytest.shape)
 
-
-classif = GaussianNB().fit(xtrain,ytrain.ravel())
-
+print(xtrain,ytrain)
+classif = GaussianNB().fit(xtrain,ytrain)
+print(classif)
 predicted = classif.predict(xtest)
+pri_enc = le.fit_transform(['sunny','cool','high','strong'])
 
-predictTestData= classif.predict([[5,148,72,35,0,32.6,0.543,50]])
+predictTestData= classif.predict([pri_enc])
 
 print('\nConfusion matrix')
 print(metrics.confusion_matrix(ytest,predicted))

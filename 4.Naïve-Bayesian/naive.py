@@ -94,11 +94,12 @@ def getaccuracy(testset, predictions):
 	return (correct/float(len(testset))) * 100.0
  
 def main():
-	filename = 'naiveData.csv'
+	filename = 'edata.csv'
 	splitratio = 0.67
 	dataset = loadcsv(filename);
      
-	trainingset, testset = splitdataset(dataset, splitratio)
+	trainingset = dataset
+	testset = [['sunny','cool','high','strong']]
 	print('Split {0} rows into train={1} and test={2} rows'.format(len(dataset), len(trainingset), len(testset)))
 	# prepare model
 	summaries = summarizebyclass(trainingset);    

@@ -1,6 +1,6 @@
 import csv
 a = []
-with open('data.csv', 'r') as csvfile:
+with open('edata.csv', 'r') as csvfile:
     for row in csv.reader(csvfile):
          a.append(row)
     print(a)
@@ -10,7 +10,7 @@ print("\n The initial hypothesis is : ")
 hypothesis = ['0']*num_attribute
 print(hypothesis)
 for i in range(0, len(a)):
-     if a[i][num_attribute] == 'yes':
+     if a[i][num_attribute] == 'positive':
         for j in range(0, num_attribute):
              if hypothesis[j] == '0' or hypothesis[j] == a[i][j]:
                 hypothesis[j] = a[i][j]

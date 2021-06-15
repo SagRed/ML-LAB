@@ -114,7 +114,7 @@ def classify(node, x_test, features):
 
 
 '''Main Program'''
-dataset, features = load_csv("data.csv")
+dataset, features = load_csv("edata.csv")
 model = build_tree(dataset, features)
 
 print("----------THE DECISION TREE----------")

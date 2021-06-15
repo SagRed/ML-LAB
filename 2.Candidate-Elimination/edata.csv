@@ -1,0 +1,7 @@
+gray?,mammal?,large?,veg?,wild?,type of animal
++,+,+,+,+,elephant
++,+,+,-,+,elephant
+-,+,-,+,+,mouse
+-,+,+,+,+,giraffe
++,-,+,-,+,dinosour
++,+,+,+,-,elephant
